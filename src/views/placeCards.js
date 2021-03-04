@@ -13,5 +13,5 @@ export const placeCard = (place) => {
       </div>
     </div>
     `;
-    return component;
+  return component;
 };

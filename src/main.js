@@ -33,9 +33,16 @@ function btnSignUp() {
   signupFunc();
 }
 
-// function mxchilazoView() {
+export function lugares() {
+  const html = setCards(places, placeCard);
+  const cardPlace = document.querySelector("#placesContainer");
+  cardPlace.innerHTML = html;
+}
 
-// }
+function viewOnePlace() {
+  const navigate = onNavigate("/bellasArtes");
+  rootDiv.innerHTML = navigate;
+}
 
 window.addEventListener("DOMContentLoaded", () => {
   rootDiv = document.getElementById("root");
@@ -54,16 +61,14 @@ window.addEventListener("DOMContentLoaded", () => {
     } else if (target.id === "returnArrow") {
       back();
     }
+    else if (target.id === "placeImg") {
+      viewOnePlace();
+    }
   });
   // console.log(document.querySelector('#returnArrow'));
   // eventodeboton
 });
 
-export function lugares() {
-  const html = setCards(places, placeCard);
-  const cardPlace = document.querySelector("#placesContainer");
-  cardPlace.innerHTML = html;
-}
 window.onpopstate = () => {
   rootDiv.innerHTML = routes[window.location.pathname];
   btnLogin();
