@@ -70,34 +70,17 @@ export const retroView = `
 `;
 
 // subir info a firestore
-export const newReview = async (buildReview, limpiar, reLimpiar) => {
+export const newReview = (buildReview, limpiar, reLimpiar) => {
   const name = document.querySelector('#name').value;
-  const post = document.querySelector('#review').value;
-  console.log(name, post);
-  // comenzar firebase registra posteos en fs
-  await buildReview(name, post, limpiar, reLimpiar);
+  const review = document.querySelector('#review').value;
+  console.log(name, review);
+  const like = [];
+  if (name !== '') {
+    // comenzar firebase registra posteos en fs
+    buildReview(name, review, like, limpiar, reLimpiar);
+  }
   //   });
 };
-
-/* 1.- sirvió se obtuvo la data
-export const seeReviews = async (getReview) => {
-  const reviewsContainer = document.querySelector('#reviewsContainer');
-  const querySnapshot = await getReview();
-  querySnapshot.forEach((doc) => {
-    console.log(doc.data());
-
-    const revs = doc.data();
-
-    reviewsContainer.innerHTML += `
-               <div id="reviewCard" class="reviewCard">
-                 <p>Usuario: ${revs.name}<br>Reseña: ${revs.post}</p>
-                 <input type="button" id="btnComment" class="btnComment" value="COMENTAR">
-                 <button type="submit"  id="btnEdit"><img src="img/edit.png" alt="Edit" id="editIcon"></button>
-                 <button type="submit"  id="btnDelete"><img src="img/delete.png" alt="Delete" id="deleteIcon"></button>
-               </div>
-              `;
-  });
-}; */
 
 // quitar los comentarios repetidos funciona!!
 export const seeReviews = async (onGetReviews) => {
@@ -111,12 +94,15 @@ export const seeReviews = async (onGetReviews) => {
 
       const revs = doc.data();
       revs.id = doc.id;// solo id de la review
-      console.log(revs);// info de las reviews name, post y id
+      // console.log(revs);// info de las reviews name, post y id
+      const likes = revs.like.length;
+      console.log(likes);
       reviewsContainer.innerHTML += `
                 <div id="reviewCard" class="reviewCard">
-                    <p>Usuario: ${revs.name}<br>Reseña: ${revs.post}</p>
+                    <p>Usuario: ${revs.name}<br>Reseña: ${revs.review}</p>
+                    <p>${likes}</p>
                     <input type="image" id="likeIcon" class="likeIcon" data-id="${revs.id}" src="img/like.png">
-                    <button data-id="${revs.id}" id="btnEdit" type="submit" class="btnEdit btnStyle">Editar</button>
+                    <button type="submit" id="btnEdit" class="btnEdit btnStyle" data-id="${revs.id}">Editar</button>
                     <button id="btnDelete" class="btnDelete btnStyle" data-id="${revs.id}">Borrar</button>
                 </div>
                 `;
@@ -138,7 +124,7 @@ export const modifyReview = (getReview, reviewId) => {
     const textReview = rev.data();
     console.log(textReview);
     document.querySelector('#name').value = textReview.name;
-    document.querySelector('#review').value = textReview.post;
+    document.querySelector('#review').value = textReview.review;
   });
 };
 
@@ -148,13 +134,40 @@ export const updateReview = (editReview, reviewId, limpiar, reLimpiar) => {
   document.querySelector('#editPostIt').style.display = 'none';
   editReview(reviewId, {
     name: document.querySelector('#name').value,
-    post: document.querySelector('#review').value,
+    review: document.querySelector('#review').value,
   }).then(() => {
     limpiar();
     reLimpiar();
   });
 };
 
-export const likesReview = () => {
+export const likesReview = (reviewId, getReview, editReview) => {
   console.log(localStorage.getItem('idUser'));// llevar a los likes
+  // const uidStorage = localStorage.getItem('uidStorage');
+  const uidStorage = localStorage.getItem('idUser');
+  getReview(reviewId).then((rev) => {
+    const uidData = rev.data().like;
+    let likeActive = false;
+    if (uidData.length !== 0) {
+      uidData.forEach((uid) => {
+        if (uid === uidStorage) {
+          likeActive = true;
+        }
+      });
+    }
+    if (likeActive === false) {
+      uidData.push(uidStorage);
+      editReview(reviewId, {
+        like: uidData,
+      }).then(() => {
+      });
+    } else {
+      const uidPosition = uidData.indexOf(uidStorage);
+      uidData.splice(uidPosition, 1);
+      editReview(reviewId, {
+        like: uidData,
+      }).then(() => {
+      });
+    }
+  });
 };

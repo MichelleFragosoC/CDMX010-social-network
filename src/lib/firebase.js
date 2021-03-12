@@ -26,7 +26,7 @@ function saveData(user) {
     });
 }
 
-function saveUs(user) {
+/* function saveUs(user) {
   console.log(user.user.uid); // uid de usuario
   console.log(user.user.email);
   const usuario = {
@@ -39,7 +39,7 @@ function saveUs(user) {
     .then(() => {
       console.log('Document successfully written!');
     });
-}
+} */
 
 // comenzar firebase registra nuevos usuarios
 export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) => {
@@ -50,7 +50,6 @@ export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) =>
       // Signed in
       // ...
       saveData(user);
-      saveUs(user);
       const navigate = onNavigate('/mxchilazo');
       rootDiv.innerHTML = navigate;
       lugares();
@@ -152,20 +151,12 @@ export const facebookAuth = (onNavigate, rootDiv, lugares) => {
     });
 };
 
-/* funciona! escribir en la base de datos
-export const createUser = async (email, password) => {
-  await db.collection('users').doc().set({
-    email,
-    password,
-  });
-}; */
-
 // escribir datos del post a db
-export const buildReview = async (name, post, limpiar, reLimpiar) => {
+export const buildReview = async (name, review, like, limpiar, reLimpiar) => {
   await db
     .collection('reviews')
     .doc()
-    .set({ name, post })
+    .set({ name, review, like })
     .then(() => {
       console.log('Document successfully written!');
       limpiar();
@@ -173,47 +164,12 @@ export const buildReview = async (name, post, limpiar, reLimpiar) => {
     });
 };
 
-// ejemplo promesa
-// export const getReview = () => db.collection('reviews').get();
-
 // cuando se obtienen tareas. de la collectacion cada vez que un dato
 // cambie o una nueva tarea sea agregada voy a manejarlo como una funcion callback
 export const onGetReviews = (callback) => db.collection('reviews').onSnapshot(callback);
-
-// leer datos “get” para recuperar toda la colección. llevar a main?
-// export const getCollectonReview = () => {
-//   db.collection("reviews")
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         // doc.data() is never undefined for query doc snapshots
-//         console.log(doc.id, " => ", doc.data());
-//       });
-//     });
-// };
-
-// db.collection("users").get().then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//       console.log(${doc.id} => ${doc.data()});
-//   });
-// });
 
 export const deleteReview = (id) => db.collection('reviews').doc(id).delete();
 
 export const getReview = (id) => db.collection('reviews').doc(id).get();
 
 export const editReview = (id, updatedReview) => db.collection('reviews').doc(id).update(updatedReview);
-
-/* function getUser(user, id) {
-  const getUs = {
-    uid: user.user.uid,
-  };
-  db.collection('users')
-    .doc(id)
-    .get(getUs);
-}
-console.log(getUser()); */
-
-// export const likecount = (id, uid) => db.collection('reviews').doc(id).
-// collection('likes').add({ uid });
-//  uid: user.user.uid
