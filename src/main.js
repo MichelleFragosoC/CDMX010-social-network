@@ -98,7 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
     } else if (target.id === "editPostIt") {
       updateReview(editReview, updateId, limpiar, reLimpiar);
     } else if (target.id === "likeIcon") {
-      likesReview();
+      likesReview(target.dataset.id, getReview, editReview);
     }
   });
   // console.log(document.querySelector('#returnArrow'));
