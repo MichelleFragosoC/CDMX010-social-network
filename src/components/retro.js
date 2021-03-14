@@ -73,7 +73,7 @@ export const retroView = `
 export const newReview = (buildReview, limpiar, reLimpiar) => {
   const name = document.querySelector('#name').value;
   const review = document.querySelector('#review').value;
-  console.log(name, review);
+  // console.log(name, review);
   const like = [];
   if (name !== '') {
     // comenzar firebase registra posteos en fs
@@ -96,7 +96,7 @@ export const seeReviews = async (onGetReviews) => {
       revs.id = doc.id;// solo id de la review
       // console.log(revs);// info de las reviews name, post y id
       const likes = revs.like.length;
-      console.log(likes);
+      // console.log(likes);
       reviewsContainer.innerHTML += `
                 <div id="reviewCard" class="reviewCard">
                     <p>Usuario: ${revs.name}<br>Reseña: ${revs.review}</p>
@@ -112,24 +112,24 @@ export const seeReviews = async (onGetReviews) => {
 
 export const quitReview = (deleteReview, reviewId) => {
   deleteReview(reviewId).then(() => {
-    console.log(`reseña ${reviewId} borrada`);
+    // console.log(`reseña ${reviewId} borrada`);
   });
 };
 
 export const modifyReview = (getReview, reviewId) => {
-  console.log(getReview + reviewId);
+  // console.log(getReview + reviewId);
   document.querySelector('#postIt').style.display = 'none';
   document.querySelector('#editPostIt').style.display = 'block';
   getReview(reviewId).then((rev) => {
     const textReview = rev.data();
-    console.log(textReview);
+    // console.log(textReview);
     document.querySelector('#name').value = textReview.name;
     document.querySelector('#review').value = textReview.review;
   });
 };
 
 export const updateReview = (editReview, reviewId, limpiar, reLimpiar) => {
-  console.log(editReview + reviewId);
+  // console.log(editReview + reviewId);
   document.querySelector('#postIt').style.display = 'block';
   document.querySelector('#editPostIt').style.display = 'none';
   editReview(reviewId, {
@@ -142,7 +142,7 @@ export const updateReview = (editReview, reviewId, limpiar, reLimpiar) => {
 };
 
 export const likesReview = (reviewId, getReview, editReview) => {
-  console.log(localStorage.getItem('idUser'));// llevar a los likes
+  // console.log(localStorage.getItem('idUser'));// llevar a los likes
   // const uidStorage = localStorage.getItem('uidStorage');
   const uidStorage = localStorage.getItem('idUser');
   getReview(reviewId).then((rev) => {
