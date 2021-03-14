@@ -15,7 +15,5 @@ export const logIn = `
 export const loginFunc = (loginUser, onNavigate, rootDiv, lugares) => {
   const email = document.querySelector('#loginEmail').value;
   const password = document.querySelector('#loginPassword').value;
-  // console.log(email + password);
-  // usuarios existentes en auth
   loginUser(email, password, onNavigate, rootDiv, lugares);
 };

@@ -1,10 +1,15 @@
 /* eslint-disable quotes */
-import { newUserAccount, loginUser, googleAuth, facebookAuth, buildReview, onGetReviews, deleteReview, getReview, editReview } from './lib/firebase.js';
+import {
+  newUserAccount, loginUser, googleAuth, facebookAuth, buildReview,
+  onGetReviews, deleteReview, getReview, editReview,
+} from './lib/firebase.js';
 import { routes, onNavigate } from "./routes.js";
 import { signupFunc } from './components/signup.js';
 import { loginFunc } from './components/login.js';
 import { places, placeCard, setCards } from './components/places.js';
-import { newReview, seeReviews, quitReview, modifyReview, updateReview, likesReview } from "./components/retro.js";
+import {
+  newReview, seeReviews, quitReview, modifyReview, updateReview, likesReview,
+} from "./components/retro.js";
 
 let rootDiv = null;
 // let reviewId = e.target.dataset.id;
