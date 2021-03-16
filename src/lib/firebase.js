@@ -26,21 +26,6 @@ function saveData(user) {
     });
 }
 
-function saveUs(user) {
-  console.log(user.user.uid); // uid de usuario
-  console.log(user.user.email);
-  const usuario = {
-    uid: user.user.uid,
-    email: user.user.email,
-  };
-  db.collection('reviews')
-    .doc()
-    .set(usuario)
-    .then(() => {
-      console.log('Document successfully written!');
-    });
-}
-
 // comenzar firebase registra nuevos usuarios
 export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) => {
   firebase
@@ -50,7 +35,6 @@ export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) =>
       // Signed in
       // ...
       saveData(user);
-      saveUs(user);
       const navigate = onNavigate('/mxchilazo');
       rootDiv.innerHTML = navigate;
       lugares();
@@ -69,69 +53,25 @@ export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) =>
 
 // usuarios existentes
 export const loginUser = (email, password) => {
-  return firebase.auth().signInWithEmailAndPassword(email, password);
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password);
 };
 
 // autentificacion google
-export const googleAuth = (onNavigate, rootDiv, lugares) => {
+export const googleAuth = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase
+  return firebase
     .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      /** @type {firebase.auth.OAuthCredential} */
-      const credential = result.credential;
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // ...
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      console.log(result);
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      const credential = error.credential;
-      // ...
-    });
+    .signInWithPopup(provider);
 };
 
 // autentificacion facebook
-export const facebookAuth = (onNavigate, rootDiv, lugares) => {
+export const facebookAuth = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  firebase
+  return firebase
     .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      /** @type {firebase.auth.OAuthCredential} */
-      const credential = result.credential;
-      // The signed-in user info.
-      const user = result.user;
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      const accessToken = credential.accessToken;
-      // ...
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      console.log(result);
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      const credential = error.credential;
-      // ...
-    });
+    .signInWithPopup(provider);
 };
 
 /* funciona! escribir en la base de datos

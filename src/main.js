@@ -11,26 +11,16 @@ loadFirebase(firebase);
 
 // let reviewId = e.target.dataset.id;
 // ambas pantallas
-function back() {
-  onNavigate("/");
-}
+// function back() {
+//   onNavigate("/");
+// }
 
 // pantalla 3 de
-export function lugares() {
-  const html = setCards(places, placeCard);
-  const cardPlace = document.querySelector("#placesContainer");
-  cardPlace.innerHTML = html;
-}
-
-// ambas pantallas
-function loginGmail() {
-  googleAuth(onNavigate, rootDiv, lugares);
-}
-
-// ambas pantallas
-function loginFacebook() {
-  facebookAuth(onNavigate, rootDiv, lugares);
-}
+// export function lugares() {
+//   const html = setCards(places, placeCard);
+//   const cardPlace = document.querySelector("#placesContainer");
+//   cardPlace.innerHTML = html;
+// }
 
 function viewOnePlace() {
   onNavigate("/bellasArtes");
@@ -60,12 +50,6 @@ window.addEventListener("DOMContentLoaded", () => {
     // if (target.id !== 'signUp' && target.id !== 'login') return;
     if (target.id === "btnSignUp") {
       signupFunc(newUserAccount, onNavigate, rootDiv, lugares);
-    } else if (target.id === "btnGmail") {
-      loginGmail();
-    } else if (target.id === "btnFacebook") {
-      loginFacebook();
-    } else if (target.id === "returnArrow") {
-      back();
     } else if (target.id === "placeImg") {
       viewOnePlace();
       seeReviews(onGetReviews);

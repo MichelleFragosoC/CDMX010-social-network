@@ -1,4 +1,4 @@
-import { onNavigate } from "../routes.js";
+import { onNavigate } from '../routes.js';
 
 export const logIn = (target, firebase) => {
   const html = `
@@ -14,15 +14,16 @@ export const logIn = (target, firebase) => {
       <input type="image" id="returnArrow" class="returnArrow" src="img/Vector.png">
   </div>
   `;
-  target.innerHTML =  html
+  target.innerHTML = html;
 
-  document.getElementById('enter').addEventListener("click", () => {
+  document.getElementById('enter').addEventListener('click', () => {
     const email = document.querySelector('#loginEmail').value;
     const password = document.querySelector('#loginPassword').value;
-    firebase.loginUser(email, password)
+    firebase
+      .loginUser(email, password)
       .then((user) => {
         onNavigate('/mxchilazo');
-        
+
         localStorage.setItem('idUser', user.user.uid);
       })
       .catch((error) => {
@@ -30,4 +31,32 @@ export const logIn = (target, firebase) => {
         alert(errorMessage);
       });
   });
-}
+
+  document.getElementById('btnGmail').addEventListener('click', () => {
+    firebase
+      .googleAuth()
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        const credential = result.credential;
+        const token = credential.accessToken;
+        const user = result.user;
+        onNavigate('/mxchilazo');
+      });
+  });
+
+  document.getElementById('btnFacebook').addEventListener('click', () => {
+    firebase
+      .facebookAuth()
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        const credential = result.credential;
+        const token = credential.accessToken;
+        const user = result.user;
+        onNavigate('/mxchilazo');
+      });
+  });
+
+  document.getElementById('returnArrow').addEventListener('click', () => {
+    onNavigate('/');
+  });
+};
