@@ -1,3 +1,5 @@
+import { onNavigate } from '../routes.js';
+
 export const signUpView = (target, firebase) => {
   const html = `
   <div id="signUpViewContainer" class="container">
@@ -13,11 +15,48 @@ export const signUpView = (target, firebase) => {
     </div>
   `;
   target.innerHTML = html;
-};
 
-export const signupFunc = (newUserAccount, onNavigate, rootDiv, lugares) => {
-  const email = document.querySelector('#signupEmail').value;
-  const password = document.querySelector('#signupPassword').value;
-  // comenzar firestore registra nuevos usuarios con auth
-  newUserAccount(email, password, onNavigate, rootDiv, lugares);
+  document.getElementById('btnSignUp').addEventListener('click', () => {
+    const email = document.querySelector('#signupEmail').value;
+    const password = document.querySelector('#signupPassword').value;
+    firebase
+      .newUserAccount(email, password)
+      .then((user) => {
+        firebase.saveData(user);
+        onNavigate('/mxchilazo');
+        // localStorage.setItem('idUser', user.user.uid);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  });
+
+  document.getElementById('btnGmail').addEventListener('click', () => {
+    firebase
+      .googleAuth()
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        const credential = result.credential;
+        const token = credential.accessToken;
+        const user = result.user;
+        onNavigate('/mxchilazo');
+      });
+  });
+
+  document.getElementById('btnFacebook').addEventListener('click', () => {
+    firebase
+      .facebookAuth()
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        const credential = result.credential;
+        const token = credential.accessToken;
+        const user = result.user;
+        onNavigate('/mxchilazo');
+      });
+  });
+
+  document.getElementById('returnArrow').addEventListener('click', () => {
+    onNavigate('/');
+  });
 };

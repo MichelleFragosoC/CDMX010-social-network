@@ -11,7 +11,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // escribir datos
-function saveData(user) {
+export function saveData(user) {
   console.log(user.user.uid); // uid de usuario
   console.log(user.user.email);
   const usuario = {
@@ -27,28 +27,10 @@ function saveData(user) {
 }
 
 // comenzar firebase registra nuevos usuarios
-export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) => {
-  firebase
+export const newUserAccount = (email, password) => {
+  return firebase
     .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      // Signed in
-      // ...
-      saveData(user);
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      // console.log(user);
-      // console.log(user.user);
-      // console.log(user.user.email);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-      // console.log(errorCode + errorMessage);
-      alert(errorMessage);
-    });
+    .createUserWithEmailAndPassword(email, password);
 };
 
 // usuarios existentes
@@ -73,14 +55,6 @@ export const facebookAuth = () => {
     .auth()
     .signInWithPopup(provider);
 };
-
-/* funciona! escribir en la base de datos
-export const createUser = async (email, password) => {
-  await db.collection('users').doc().set({
-    email,
-    password,
-  });
-}; */
 
 // escribir datos del post a db
 export const buildReview = async (name, post, limpiar, reLimpiar) => {

@@ -1,8 +1,7 @@
 /* eslint-disable quotes */
 import * as firebase from './lib/firebase.js';
 import { routes, onNavigate, loadFirebase} from "./routes.js";
-import { signupFunc } from './components/signup.js';
-import { places, placeCard, setCards } from './components/places.js';
+// import { places, placeCard, setCards } from './components/places.js';
 import { newReview, seeReviews, quitReview, modifyReview, updateReview, likesReview } from "./components/retro.js";
 
 let rootDiv = document.getElementById("root");
@@ -48,9 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
   rootDiv.addEventListener("click", (event) => {
     const target = event.target;
     // if (target.id !== 'signUp' && target.id !== 'login') return;
-    if (target.id === "btnSignUp") {
-      signupFunc(newUserAccount, onNavigate, rootDiv, lugares);
-    } else if (target.id === "placeImg") {
+    if (target.id === "placeImg") {
       viewOnePlace();
       seeReviews(onGetReviews);
     } else if (target.id === "postIt") {
