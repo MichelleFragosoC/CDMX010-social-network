@@ -57,59 +57,24 @@ export const facebookAuth = () => {
 };
 
 // escribir datos del post a db
-export const buildReview = async (name, post, limpiar, reLimpiar) => {
+export const buildReview = async (name, post) => {
   await db
     .collection('reviews')
     .doc()
     .set({ name, post })
     .then(() => {
       console.log('Document successfully written!');
-      limpiar();
-      reLimpiar();
     });
 };
-
-// ejemplo promesa
-// export const getReview = () => db.collection('reviews').get();
 
 // cuando se obtienen tareas. de la collectacion cada vez que un dato
 // cambie o una nueva tarea sea agregada voy a manejarlo como una funcion callback
 export const onGetReviews = (callback) => db.collection('reviews').onSnapshot(callback);
 
-// leer datos “get” para recuperar toda la colección. llevar a main?
-// export const getCollectonReview = () => {
-//   db.collection("reviews")
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         // doc.data() is never undefined for query doc snapshots
-//         console.log(doc.id, " => ", doc.data());
-//       });
-//     });
-// };
-
-// db.collection("users").get().then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//       console.log(${doc.id} => ${doc.data()});
-//   });
-// });
+// leer datos “get” para recuperar toda la colección.
 
 export const deleteReview = (id) => db.collection('reviews').doc(id).delete();
 
 export const getReview = (id) => db.collection('reviews').doc(id).get();
 
 export const editReview = (id, updatedReview) => db.collection('reviews').doc(id).update(updatedReview);
-
-/* function getUser(user, id) {
-  const getUs = {
-    uid: user.user.uid,
-  };
-  db.collection('users')
-    .doc(id)
-    .get(getUs);
-}
-console.log(getUser()); */
-
-// export const likecount = (id, uid) => db.collection('reviews').doc(id).
-// collection('likes').add({ uid });
-//  uid: user.user.uid

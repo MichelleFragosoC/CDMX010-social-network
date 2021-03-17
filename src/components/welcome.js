@@ -9,14 +9,14 @@ export const welcome = (target, firebase) => {
    </div>
    `;
    target.innerHTML = html;
-   
-   const btnLogin = document.getElementById('login');
-   btnLogin.addEventListener('click', () => {
-       onNavigate('/logIn')
-    })
-    
-    const btnSignUp = document.getElementById('signUp');
-    btnSignUp.addEventListener('click', () => {
-        onNavigate("/signUp");
-    })
-}
+
+  const btnLogin = document.getElementById('login');
+  btnLogin.addEventListener('click', () => {
+    onNavigate('/logIn');
+  });
+
+  const btnSignUp = document.getElementById('signUp');
+  btnSignUp.addEventListener('click', () => {
+    onNavigate('/signUp');
+  });
+};

@@ -1,4 +1,5 @@
 import data from '../data/mxchilazo.js';
+import { onNavigate } from '../routes.js';
 
 export const placesView = (target, firebase) => {
   const html = `
@@ -56,12 +57,17 @@ export const placesView = (target, firebase) => {
   
   </div>
   `;
-  target.innerHTML = html 
+  target.innerHTML = html;
 
   const cardPlaceHtml = setCards(places, placeCard);
-  const cardPlaceContainer = document.querySelector("#placesContainer");
+  const cardPlaceContainer = document.querySelector('#placesContainer');
   cardPlaceContainer.innerHTML = cardPlaceHtml;
-}
+
+  const btnImg = document.getElementById('placeImg');
+  btnImg.addEventListener('click', () => {
+    onNavigate('/bellasArtes');
+  });
+};
 
 // placeCards
 export const places = data.place;
