@@ -1,5 +1,3 @@
-import { onNavigate } from "../routes.js";
-
 export const retroView = (target, firebase) => {
   const html = `
   <div id="retroView" class="container">
@@ -73,26 +71,29 @@ export const retroView = (target, firebase) => {
   `;
   target.innerHTML = html;
 
-  const reviewsContainer = document.querySelector("#reviewsContainer");
+  const reviewsContainer = document.querySelector('#reviewsContainer');
   // cada vez que se ejecute el get dara un dato cada vez que cambie
   firebase.onGetReviews((querySnapshot) => {
     // se recibe a travez del objeto query, todos los datos
     // antes de que hagas el foreach
-    reviewsContainer.innerHTML = "";
+    reviewsContainer.innerHTML = '';
     querySnapshot.forEach((doc) => {
       // console.log(doc.data());
       const revs = doc.data();
       revs.id = doc.id; // solo id de la review
       console.log(revs); // info de las reviews name, post y id
+      const likes = revs.like.length;
+      console.log(likes);
       reviewsContainer.innerHTML += `
                 <div id="reviewCard" class="reviewCard">
-                    <p>Usuario: ${revs.name}<br>Reseña: ${revs.post}</p>
+                    <p>Usuario: ${revs.name}<br>Reseña: ${revs.review}</p>
+                    <p>${likes}</p>
                     <input type="image" id="likeIcon" class="likeIcon" data-id="${revs.id}" src="img/like.png">
-                    <button data-id="${revs.id}" id="btnEdit" type="submit" class="btnEdit btnStyle">Editar</button>
+                    <button type="submit" id="btnEdit" class="btnEdit btnStyle" data-id="${revs.id}">Editar</button>
                     <button id="btnDelete" class="btnDelete btnStyle" data-id="${revs.id}">Borrar</button>
                 </div>
                 `;
-
+      // quit review
       const btnDelete = document.querySelectorAll('#btnDelete');
       btnDelete.forEach((btn) => {
         btn.addEventListener('click', async (event) => {
@@ -102,25 +103,58 @@ export const retroView = (target, firebase) => {
         });
       });
       //
+      let updateId = null;
+      // modify review
+      const btnEdit = document.querySelectorAll('#btnEdit');
+      btnEdit.forEach((btn) => {
+        btn.addEventListener('click', async (event) => {
+          document.querySelector('#postIt').style.display = 'none';
+          document.querySelector('#editPostIt').style.display = 'block';
+          await firebase.getReview(event.target.dataset.id).then((rev) => {
+            const textReview = rev.data();
+            console.log(textReview);
+            document.querySelector('#name').value = textReview.name;
+            document.querySelector('#review').value = textReview.review;
+            updateId = event.target.dataset.id;
+          });
+        });
+      });
+      // updateReview
+      document.getElementById('editPostIt').addEventListener('click', async () => {
+        document.querySelector('#postIt').style.display = 'block';
+        document.querySelector('#editPostIt').style.display = 'none';
+        await firebase.editReview(updateId, {
+          name: document.querySelector('#name').value,
+          review: document.querySelector('#review').value,
+        }).then(() => {
+          limpiar();
+          reLimpiar();
+        });
+      });
+      //
     });
   });
 
   function limpiar() {
-    document.getElementsByClassName("clear")[0].value = "";
+    document.getElementsByClassName('clear')[0].value = '';
   }
 
   function reLimpiar() {
-    document.getElementsByClassName("clear")[1].value = "";
+    document.getElementsByClassName('clear')[1].value = '';
   }
 
   // subir info a firestore
-  document.getElementById("postIt").addEventListener("click", () => {
-    const name = document.querySelector("#name").value;
-    const post = document.querySelector("#review").value;
-    console.log(name, post);
-    firebase.buildReview(name, post);
-    limpiar();
-    reLimpiar();
+  // new Review
+  document.getElementById('postIt').addEventListener('click', () => {
+    const name = document.querySelector('#name').value;
+    const review = document.querySelector('#review').value;
+    console.log(name, review);
+    const like = [];
+    if (name !== '') {
+      firebase.buildReview(name, review, like);
+      limpiar();
+      reLimpiar();
+    }
   });
 };
 // aqui nos quedamos

@@ -57,11 +57,11 @@ export const facebookAuth = () => {
 };
 
 // escribir datos del post a db
-export const buildReview = async (name, post) => {
+export const buildReview = async (name, review, like) => {
   await db
     .collection('reviews')
     .doc()
-    .set({ name, post })
+    .set({ name, review, like })
     .then(() => {
       console.log('Document successfully written!');
     });

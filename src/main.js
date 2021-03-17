@@ -2,7 +2,7 @@
 import * as firebase from './lib/firebase.js';
 import { routes, onNavigate, loadFirebase} from "./routes.js";
 // import { places, placeCard, setCards } from './components/places.js';
-import { modifyReview, updateReview, likesReview } from "./components/retro.js";
+import { likesReview } from "./components/retro.js";
 
 let rootDiv = document.getElementById("root");
 
@@ -16,12 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
   rootDiv.addEventListener("click", (event) => {
     const target = event.target;
     // if (target.id !== 'signUp' && target.id !== 'login') return;
-    if (target.id === "btnEdit") {
-      modifyReview(getReview, target.dataset.id);
-      updateId = target.dataset.id;
-    } else if (target.id === "editPostIt") {
-      updateReview(editReview, updateId, limpiar, reLimpiar);
-    } else if (target.id === "likeIcon") {
+    if (target.id === "likeIcon") {
       likesReview();
     }
   });
