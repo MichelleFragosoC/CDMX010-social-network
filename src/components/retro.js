@@ -131,7 +131,39 @@ export const retroView = (target, firebase) => {
           reLimpiar();
         });
       });
-      //
+    });
+    const btnLike = document.querySelectorAll('#likeIcon');
+    btnLike.forEach((btn) => {
+      btn.addEventListener('click', (event) => {
+        // console.log('likeado');
+        const uidStorage = localStorage.getItem('idUser');
+        console.log(uidStorage);
+        firebase.getReview(event.target.dataset.id).then((rev) => {
+          const uidData = rev.data().like;
+          let likeActive = false;
+          if (uidData.length !== 0) {
+            uidData.forEach((uid) => {
+              if (uid === uidStorage) {
+                likeActive = true;
+              }
+            });
+          }
+          if (likeActive === false) {
+            uidData.push(uidStorage);
+            firebase.editReview(event.target.dataset.id, {
+              like: uidData,
+            }).then(() => {
+            });
+          } else {
+            const uidPosition = uidData.indexOf(uidStorage);
+            uidData.splice(uidPosition, 1);
+            firebase.editReview(event.target.dataset.id, {
+              like: uidData,
+            }).then(() => {
+            });
+          }
+        });
+      });
     });
   });
 
@@ -142,7 +174,6 @@ export const retroView = (target, firebase) => {
   function reLimpiar() {
     document.getElementsByClassName('clear')[1].value = '';
   }
-
   // subir info a firestore
   // new Review
   document.getElementById('postIt').addEventListener('click', () => {
@@ -156,33 +187,4 @@ export const retroView = (target, firebase) => {
       reLimpiar();
     }
   });
-};
-// aqui nos quedamos
-export const modifyReview = (getReview, reviewId) => {
-  console.log(getReview + reviewId);
-  document.querySelector("#postIt").style.display = "none";
-  document.querySelector("#editPostIt").style.display = "block";
-  getReview(reviewId).then((rev) => {
-    const textReview = rev.data();
-    console.log(textReview);
-    document.querySelector("#name").value = textReview.name;
-    document.querySelector("#review").value = textReview.post;
-  });
-};
-
-export const updateReview = (editReview, reviewId, limpiar, reLimpiar) => {
-  console.log(editReview + reviewId);
-  document.querySelector("#postIt").style.display = "block";
-  document.querySelector("#editPostIt").style.display = "none";
-  editReview(reviewId, {
-    name: document.querySelector("#name").value,
-    post: document.querySelector("#review").value,
-  }).then(() => {
-    limpiar();
-    reLimpiar();
-  });
-};
-
-export const likesReview = () => {
-  console.log(localStorage.getItem("idUser")); // llevar a los likes
 };
