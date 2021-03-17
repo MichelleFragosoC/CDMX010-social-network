@@ -24,7 +24,7 @@ export const signUpView = (target, firebase) => {
       .then((user) => {
         firebase.saveData(user);
         onNavigate('/mxchilazo');
-        // localStorage.setItem('idUser', user.user.uid);
+        localStorage.setItem('idUser', user.user.uid);
       })
       .catch((error) => {
         const errorMessage = error.message;
