@@ -12,8 +12,8 @@ const db = firebase.firestore();
 
 // escribir datos
 export function saveData(user) {
-  // console.log(user.user.uid); // uid de usuario
-  // console.log(user.user.email);
+  console.log(user.user.uid); // uid de usuario
+  console.log(user.user.email);
   const usuario = {
     uid: user.user.uid,
     email: user.user.email,
@@ -27,134 +27,51 @@ export function saveData(user) {
 }
 
 // comenzar firebase registra nuevos usuarios
-export const newUserAccount = (email, password, onNavigate, rootDiv, lugares) => {
-  firebase
+export const newUserAccount = (email, password) => {
+  return firebase
     .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      // Signed in
-      // ...
-      saveData(user);
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      // console.log(user);
-      // console.log(user.user);
-      // console.log(user.user.email);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-      // console.log(errorCode + errorMessage);
-      // eslint-disable-next-line no-alert
-      alert(errorMessage);
-    });
+    .createUserWithEmailAndPassword(email, password);
 };
 
 // usuarios existentes
-export const loginUser = (email, password, onNavigate, rootDiv, lugares) => {
-  firebase
+export const loginUser = (email, password) => {
+  return firebase
     .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      // console.log(user);
-      localStorage.setItem('idUser', user.user.uid);
-      // Signed in
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.email;
-      // console.log(errorCode + errorMessage + email);
-      // eslint-disable-next-line no-alert
-      alert(errorMessage);
-    });
+    .signInWithEmailAndPassword(email, password);
 };
 
 // autentificacion google
-export const googleAuth = (onNavigate, rootDiv, lugares) => {
+export const googleAuth = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase
+  return firebase
     .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      /** @type {firebase.auth.OAuthCredential} */
-      // const credential = result.credential;
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const token = credential.accessToken;
-      // // The signed-in user info.
-      // const user = result.user;
-      // ...
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      // console.log(result);
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // // The email of the user's account used.
-      // const email = error.email;
-      // // The firebase.auth.AuthCredential type that was used.
-      // const credential = error.credential;
-      // ...
-    });
+    .signInWithPopup(provider);
 };
 
 // autentificacion facebook
-export const facebookAuth = (onNavigate, rootDiv, lugares) => {
+export const facebookAuth = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
-  firebase
+  return firebase
     .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      /** @type {firebase.auth.OAuthCredential} */
-      // const credential = result.credential;
-      // The signed-in user info.
-      // const user = result.user;
-      // // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      // const accessToken = credential.accessToken;
-      // ...
-      const navigate = onNavigate('/mxchilazo');
-      rootDiv.innerHTML = navigate;
-      lugares();
-      // console.log(result);
-    })
-    // .catch((error) => {
-      // Handle Errors here.
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // // The email of the user's account used.
-      // const email = error.email;
-      // // The firebase.auth.AuthCredential type that was used.
-      // const credential = error.credential;
-      // ...
-    },;
-    //);
-//};
+    .signInWithPopup(provider);
+};
 
 // escribir datos del post a db
-export const buildReview = async (name, review, like, limpiar, reLimpiar) => {
+export const buildReview = async (name, review, like) => {
   await db
     .collection('reviews')
     .doc()
     .set({ name, review, like })
     .then(() => {
-      // console.log('Document successfully written!');
-      limpiar();
-      reLimpiar();
+      console.log('Document successfully written!');
     });
 };
 
 // cuando se obtienen tareas. de la collectacion cada vez que un dato
 // cambie o una nueva tarea sea agregada voy a manejarlo como una funcion callback
 export const onGetReviews = (callback) => db.collection('reviews').onSnapshot(callback);
+
+// leer datos “get” para recuperar toda la colección.
 
 export const deleteReview = (id) => db.collection('reviews').doc(id).delete();
 
