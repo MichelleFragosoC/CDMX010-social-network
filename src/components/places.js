@@ -32,11 +32,10 @@ export const placesView = (target, firebase) => {
                           </li>
                       <li><a href="#">Los 10 más populares</a></li>
                       <li><a href="#">Favoritos</a></li>
-                      <li><a href="#">Cerrar Sesión</a></li>
-                  </ul>
-  
+                      <li><a href="/">Cerrar Sesión</a></li>
+                  </ul>  
               <div class="iconos">
-                  <a href="#"><i aria-hidden="true" class="fa fa-home"></i></a>
+                  <a href="/mxchilazo"><i aria-hidden="true" class="fa fa-home"></i></a>
               </div>
   
           </div>
