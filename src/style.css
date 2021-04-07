@@ -327,12 +327,13 @@ a:hover{
     /* display: inline-block; */
     /* position: absolute; */
 }
-/*#likeIcon{
+
+#likeIcon{
     width: 8%;
     top: 125px;
-    /* position: absolute; 
+    /* position: absolute; */
     left: 220px;
-}*/
+}
 
 #placesContainer{
     display: flex;
