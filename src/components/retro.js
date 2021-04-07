@@ -8,7 +8,7 @@ export const retroView = (target, firebase) => {
               <input type="checkbox"/>
                   <label><i aria-hidden="true" class="fa fa-bars"></i></label>
                   <ul class='principal'>
-                      <li><a href="/">Inicio</a></li>
+                      <li><a href='/mxchilazo'>Inicio</a></li>
                           <li><a href="#">Alcaldías<i class="fa fa-chevron-down"></i></a>
                           <input type="checkbox"/>
                           <label><i aria-hidden="true" class="fa fa-cheron-down"></i></label>
@@ -130,7 +130,7 @@ export const retroView = (target, firebase) => {
         });
       });
     });
-    const btnLike = document.querySelectorAll('#likeIcon');
+    const btnLike = document.querySelectorAll('#likeIcon'); // arrays
     btnLike.forEach((btn) => {
       btn.addEventListener('click', (event) => {
         // console.log('likeado');
@@ -157,7 +157,7 @@ export const retroView = (target, firebase) => {
             uidData.splice(uidPosition, 1);
             firebase.editReview(event.target.dataset.id, {
               like: uidData,
-            }).then(() => {
+            }).then(() => { // consume la promesa 
             });
           }
         });

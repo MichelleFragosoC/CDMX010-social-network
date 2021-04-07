@@ -11,7 +11,7 @@ export const placesView = (target, firebase) => {
               <input type="checkbox"/>
                   <label><i aria-hidden="true" class="fa fa-bars"></i></label>
                   <ul class='principal'>
-                      <li><a href="/">Inicio</a></li>
+                      <li><a href='/mxchilazo'>Inicio</a></li>
                           <li><a href="#">Alcaldías<i class="fa fa-chevron-down"></i></a>
                           <input type="checkbox"/>
                           <label><i aria-hidden="true" class="fa fa-cheron-down"></i></label>
