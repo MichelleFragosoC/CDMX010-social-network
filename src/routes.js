@@ -26,6 +26,6 @@ export const onNavigate = (pathname) => {
     pathname,
     window.location.origin + pathname,
   );
-  const component = routes[pathname]; // repasar o analizar esto
+  const component = routes[pathname];
   component(target, firebase);
 };

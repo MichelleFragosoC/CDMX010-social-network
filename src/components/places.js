@@ -40,13 +40,11 @@ export const placesView = (target, firebase) => {
   
           </div>
       </nav> 
-    </div>
-  
+    </div>  
     <div id="searchPlace">
     <input type="text" id="search" class="search" placeholder="Buscar" />
     <img id="searchIcon" src="img/bx-search.svg" alt="" />
-    </div>
-  
+    </div>  
     <div id="sectionView">
       <h2>Quizá te interese:</h2>
     </div>
@@ -84,7 +82,6 @@ export const placeCard = (place) => {
     `;
   return component;
 };
-//linea 81 <img id="likeIcon" src="img/like2.png" alt="">
 
 export const setCards = (places, placeCard) => {
   let html = '';

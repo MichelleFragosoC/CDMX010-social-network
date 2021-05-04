@@ -12,7 +12,7 @@ const db = firebase.firestore();
 
 // escribir datos
 export function saveData(user) {
-  console.log(user.user.uid); // uid de usuario
+  console.log(user.user.uid); 
   console.log(user.user.email);
   const usuario = {
     uid: user.user.uid,
@@ -67,14 +67,7 @@ export const buildReview = async (name, review, like) => {
     });
 };
 
-// cuando se obtienen tareas. de la collectacion cada vez que un dato
-// cambie o una nueva tarea sea agregada voy a manejarlo como una funcion callback
 export const onGetReviews = (callback) => db.collection('reviews').onSnapshot(callback);
-
-// leer datos “get” para recuperar toda la colección.
-
 export const deleteReview = (id) => db.collection('reviews').doc(id).delete();
-
 export const getReview = (id) => db.collection('reviews').doc(id).get();
-
 export const editReview = (id, updatedReview) => db.collection('reviews').doc(id).update(updatedReview);

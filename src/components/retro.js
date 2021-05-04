@@ -1,7 +1,6 @@
 export const retroView = (target, firebase) => {
   const html = `
-  <div id="retroView" class="container">
-      
+  <div id="retroView" class="container">     
       <div id="header">
       <nav id="menu">
           <div class="barra">
@@ -60,9 +59,7 @@ export const retroView = (target, firebase) => {
           <input type="button" id="postIt" class="postIt" value="PUBLICAR">
           <input type="button" id="editPostIt" class="editPostIt postIt" style = "display: none" value="EDITAR">
       </div>
-      
-      <h2>RESEÑAS</h2>
-      
+      <h2>RESEÑAS</h2>     
       <div id="reviewsContainer"></div>
 
       </div>
@@ -70,16 +67,12 @@ export const retroView = (target, firebase) => {
   target.innerHTML = html;
 
   const reviewsContainer = document.querySelector('#reviewsContainer');
-  // cada vez que se ejecute el get dara un dato cada vez que cambie
   firebase.onGetReviews((querySnapshot) => {
-    // se recibe a travez del objeto query, todos los datos
-    // antes de que hagas el foreach
     reviewsContainer.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      // console.log(doc.data());
       const revs = doc.data();
-      revs.id = doc.id; // solo id de la review
-      console.log(revs); // info de las reviews name, post y id
+      revs.id = doc.id; 
+      console.log(revs);
       const likes = revs.like.length;
       console.log(likes);
       reviewsContainer.innerHTML += `
@@ -91,7 +84,6 @@ export const retroView = (target, firebase) => {
                     <button id="btnDelete" class="btnDelete btnStyle" data-id="${revs.id}">Borrar</button>
                 </div>
                 `;
-      // quit review
       const btnDelete = document.querySelectorAll('#btnDelete');
       btnDelete.forEach((btn) => {
         btn.addEventListener('click', async (event) => {
@@ -100,9 +92,8 @@ export const retroView = (target, firebase) => {
           });
         });
       });
-      //
       let updateId = null;
-      // modify review
+
       const btnEdit = document.querySelectorAll('#btnEdit');
       btnEdit.forEach((btn) => {
         btn.addEventListener('click', async (event) => {
@@ -117,7 +108,6 @@ export const retroView = (target, firebase) => {
           });
         });
       });
-      // updateReview
       document.getElementById('editPostIt').addEventListener('click', async () => {
         document.querySelector('#postIt').style.display = 'block';
         document.querySelector('#editPostIt').style.display = 'none';
@@ -130,10 +120,9 @@ export const retroView = (target, firebase) => {
         });
       });
     });
-    const btnLike = document.querySelectorAll('#likeIcon'); // arrays
+    const btnLike = document.querySelectorAll('#likeIcon'); 
     btnLike.forEach((btn) => {
       btn.addEventListener('click', (event) => {
-        // console.log('likeado');
         const uidStorage = localStorage.getItem('idUser');
         console.log(uidStorage);
         firebase.getReview(event.target.dataset.id).then((rev) => {
@@ -157,7 +146,7 @@ export const retroView = (target, firebase) => {
             uidData.splice(uidPosition, 1);
             firebase.editReview(event.target.dataset.id, {
               like: uidData,
-            }).then(() => { // consume la promesa 
+            }).then(() => { 
             });
           }
         });
@@ -172,8 +161,6 @@ export const retroView = (target, firebase) => {
   function reLimpiar() {
     document.getElementsByClassName('clear')[1].value = '';
   }
-  // subir info a firestore
-  // new Review
   document.getElementById('postIt').addEventListener('click', () => {
     const name = document.querySelector('#name').value;
     const review = document.querySelector('#review').value;

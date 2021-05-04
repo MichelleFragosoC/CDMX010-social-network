@@ -36,7 +36,7 @@ export const logIn = (target, firebase) => {
     firebase
       .googleAuth()
       .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
+        /* @type {firebase.auth.OAuthCredential} */
         const credential = result.credential;
         const token = credential.accessToken;
         const user = result.user;

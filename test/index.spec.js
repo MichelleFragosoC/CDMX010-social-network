@@ -1,19 +1,4 @@
-// importamos la funcion que vamos a testear
-import { loginFunc } from '../src/components/login.js';
 import { setCards } from '../src/components/places.js';
-import { signupFunc } from '../src/components/signup.js';
-import {
-  newReview, seeReviews, quitReview, modifyReview, updateReview, likesReview,
-} from '../src/components/retro.js';
-// import places from '../src/data/mxchilazo.js';
-// import { lugares } from '../src/main.js';
-// import {
-//   saveData, newUserAccount, loginUser, googleAuth, facebookAuth,
-//   buildReview, onGetReviews, deleteReview, getReview, editReview,
-// } from '../src/lib/firebase.js';
-
-// const delegation = data.places;
-// const delegation = places.place;
 
 describe('loginFunc', () => {
   it('debería ser una función', () => {
