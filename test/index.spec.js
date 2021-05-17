@@ -1,55 +1,35 @@
+import { logIn } from '../src/components/login';
 import { setCards } from '../src/components/places.js';
+import { signUpView } from '../src/components/signup.js';
+import { welcome } from '../src/components/welcome';
+import { retroView } from '../src/components/retro';
 
-describe('loginFunc', () => {
-  it('debería ser una función', () => {
-    expect(typeof loginFunc).toBe('function');
+describe('logIn', () => {
+  it('debería de ser una función', () => {
+    expect(typeof logIn).toBe('function');
   });
 });
 
 describe('setCards', () => {
-  it('debería ser una función', () => {
+  it('debería de ser una función', () => {
     expect(typeof setCards).toBe('function');
   });
 });
 
-describe('signupFunc', () => {
-  it('debería ser una función', () => {
-    expect(typeof signupFunc).toBe('function');
+describe('signUpView', () => {
+  it('debería de ser una función', () => {
+    expect(typeof signUpView).toBe('function');
   });
 });
 
-describe('newReview', () => {
-  it('debería ser una función', () => {
-    expect(typeof newReview).toBe('function');
+describe('welcome', () => {
+  it('debería de ser una función', () => {
+    expect(typeof welcome).toBe('function');
   });
 });
 
-describe('seeReviews', () => {
+describe('retroView', () => {
   it('debería ser una función', () => {
-    expect(typeof seeReviews).toBe('function');
-  });
-});
-
-describe('quitReview', () => {
-  it('debería ser una función', () => {
-    expect(typeof quitReview).toBe('function');
-  });
-});
-
-describe('modifyReview', () => {
-  it('debería ser una función', () => {
-    expect(typeof modifyReview).toBe('function');
-  });
-});
-
-describe('updateReview', () => {
-  it('debería ser una función', () => {
-    expect(typeof updateReview).toBe('function');
-  });
-});
-
-describe('likesReview', () => {
-  it('debería ser una función', () => {
-    expect(typeof likesReview).toBe('function');
+    expect(typeof retroView).toBe('function');
   });
 });

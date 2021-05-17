@@ -71,7 +71,7 @@ export const retroView = (target, firebase) => {
     reviewsContainer.innerHTML = '';
     querySnapshot.forEach((doc) => {
       const revs = doc.data();
-      revs.id = doc.id; 
+      revs.id = doc.id;
       console.log(revs);
       const likes = revs.like.length;
       console.log(likes);
@@ -120,7 +120,7 @@ export const retroView = (target, firebase) => {
         });
       });
     });
-    const btnLike = document.querySelectorAll('#likeIcon'); 
+    const btnLike = document.querySelectorAll('#likeIcon');
     btnLike.forEach((btn) => {
       btn.addEventListener('click', (event) => {
         const uidStorage = localStorage.getItem('idUser');
@@ -146,7 +146,7 @@ export const retroView = (target, firebase) => {
             uidData.splice(uidPosition, 1);
             firebase.editReview(event.target.dataset.id, {
               like: uidData,
-            }).then(() => { 
+            }).then(() => {
             });
           }
         });
