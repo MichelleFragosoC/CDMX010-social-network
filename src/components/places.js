@@ -11,7 +11,7 @@ export const placesView = (target, firebase) => {
               <input type="checkbox"/>
                   <label><i aria-hidden="true" class="fa fa-bars"></i></label>
                   <ul class='principal'>
-                      <li><a href="/">Inicio</a></li>
+                      <li><a href='/mxchilazo'>Inicio</a></li>
                           <li><a href="#">Alcaldías<i class="fa fa-chevron-down"></i></a>
                           <input type="checkbox"/>
                           <label><i aria-hidden="true" class="fa fa-cheron-down"></i></label>
@@ -32,22 +32,19 @@ export const placesView = (target, firebase) => {
                           </li>
                       <li><a href="#">Los 10 más populares</a></li>
                       <li><a href="#">Favoritos</a></li>
-                      <li><a href="#">Cerrar Sesión</a></li>
-                  </ul>
-  
+                      <li><a href="/">Cerrar Sesión</a></li>
+                  </ul>  
               <div class="iconos">
-                  <a href="#"><i aria-hidden="true" class="fa fa-home"></i></a>
+                  <a href="/mxchilazo"><i aria-hidden="true" class="fa fa-home"></i></a>
               </div>
   
           </div>
       </nav> 
-    </div>
-  
+    </div>  
     <div id="searchPlace">
     <input type="text" id="search" class="search" placeholder="Buscar" />
     <img id="searchIcon" src="img/bx-search.svg" alt="" />
-    </div>
-  
+    </div>  
     <div id="sectionView">
       <h2>Quizá te interese:</h2>
     </div>
@@ -79,7 +76,7 @@ export const placeCard = (place) => {
       <div id="rectangle">
         <h3 id="namePlace">${place.name}</h3>
         <h4 id="delegation">${place.delegation}</h4>
-        <img id="likeIcon" src="img/like2.png" alt="">
+        
       </div>
     </div>
     `;

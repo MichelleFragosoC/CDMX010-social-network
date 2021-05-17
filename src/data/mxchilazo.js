@@ -8,13 +8,6 @@ export default {
       description: 'El Palacio es famoso no sólo por su arquitectura, sino por su acervo ya que alberga 17 murales de artistas nacionales que se elaboraron entre 1928 y 1963. También alberga al Museo del Palacio de Bellas Artes y cuenta con tres salas; Manuel M. Ponce, Sala Adamo Aboari y la principal, siendo esta última el lugar por excelencia para disfrutar de óperas, música de cámara y obras de teatro.',
     },
     {
-      name: 'Museo Nacional de Antropología (MNA)',
-      delegation: 'Miguel Hidalgo',
-      img: 'https://media.timeout.com/images/100564319/380/285/image.jpg',
-      location: 'Reforma s/n, Polanco, CDMX, esquina con Gandhi, 11560.',
-      description: 'Este Museo es un básico cuando se trata de aprender de las culturas prehispánicas, en su acervo incluye colecciones arqueológicas y etnográficas del país. Inaugurado en septiembre de 1964, este recinto es considerado el museo más grande de América Latina. Sus exhibiciones temporales también son un punto a destacar, nos han traído exposiciones internacionales muy interesantes.',
-    },
-    {
       name: 'Biblioteca Vasconcelos',
       delegation: 'Cuauhtémoc',
       img: 'https://media.timeout.com/images/100722903/380/285/image.jpg',
@@ -41,6 +34,13 @@ export default {
       img: 'https://media.timeout.com/images/102086259/380/285/image.jpg',
       location: 'Dr. Lavista 197, Doctores, CDMX, 06720.',
       description: "Un lugar de encuentros gloriosos, desde sus inicios con el Santo y Blue Demon, hasta ser la sede de eventos de box en México 68. Hoy es una catedral en donde cada martes (el día 'popular' por los precios bajos), viernes y domingo acuden sus fieles para celebrar la gran unión del espectáculo físico y mágico que es la lucha libre.",
+    },
+    {
+      name: 'Museo Nacional de Antropología',
+      delegation: 'Miguel Hidalgo',
+      img: 'https://media.timeout.com/images/100564319/380/285/image.jpg',
+      location: 'Reforma s/n, Polanco, CDMX, esquina con Gandhi, 11560.',
+      description: 'Este Museo es un básico cuando se trata de aprender de las culturas prehispánicas, en su acervo incluye colecciones arqueológicas y etnográficas del país. Inaugurado en septiembre de 1964, este recinto es considerado el museo más grande de América Latina. Sus exhibiciones temporales también son un punto a destacar, nos han traído exposiciones internacionales muy interesantes.',
     },
     {
       name: 'Parque Nacional Cerro de la Estrella',
