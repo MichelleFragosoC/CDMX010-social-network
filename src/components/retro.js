@@ -74,7 +74,7 @@ export const retroView = (target, firebase) => {
       revs.id = doc.id;
       console.log(revs);
       const likes = revs.like.length;
-      console.log(likes);
+      // console.log(likes);
       reviewsContainer.innerHTML += `
                 <div id="reviewCard" class="reviewCard">
                     <p>Usuario: ${revs.name}<br>Reseña: ${revs.review}</p>

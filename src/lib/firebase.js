@@ -22,7 +22,7 @@ export function saveData(user) {
     .doc()
     .set(usuario)
     .then(() => {
-      console.log('Document successfully written!');
+      // console.log('Document successfully written!');
     });
 }
 
